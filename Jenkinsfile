@@ -33,7 +33,6 @@ tests.each { test ->
                 npm config set registry http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.milestones.npm/
                 npm config set @SAP:registry http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.milestones.npm/
                 npm i
-                npm run build
                 '''
 
             sh "CHROME_DRIVER=/usr/bin/chromedriver npm run test:${test.area}:${test.name}"
