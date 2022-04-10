@@ -24,24 +24,33 @@ export class Assertion {
   async expectAttributeToBe (selector: any, attribute: string, compareValue: any, index = 0, timeout = process.env.QMATE_CUSTOM_TIMEOUT || 30000, loadPropertyTimeout = 10000) {
     let elem: Element;
     let value;
+    let values;
+
+    this._throwAttributeError(attribute, "expectAttributeToBe");
+
     try {
       elem = await ui5.element.getDisplayed(selector, index, timeout);
     } catch (error) {
       throw new Error(`Function 'expectAttributeToBe' failed:${error}`);
     }
 
-    if (loadPropertyTimeout > 0) {
-      await browser.waitUntil(async () => {
-        value = await this._getUI5PropertyForElement(elem, attribute, true);
-        return String(value) === String(compareValue);
-      }, {
-        timeout: loadPropertyTimeout,
-        timeoutMsg: "Function 'expectAttributeToBe' failed: Timeout while waiting for attribute " + attribute + ". Expected value: " + String(compareValue),
-        interval: 100,
-      });
-    } else {
-      value = await this._getUI5PropertyForElement(elem, attribute, true);
-    }
+    await browser.waitUntil(async () => {
+      values = await this._getUI5PropertyForElement(elem, attribute);
+      if (String(values[0]) === String(compareValue)) {
+        value = String(values[0]);
+        return String(values[0]) === String(compareValue);
+      } else if (String(values[1]) === String(compareValue)) {
+        value = String(values[1]);
+        return String(values[1]) === String(compareValue);
+      } else {
+        return false;
+      }
+    }, {
+      timeout: loadPropertyTimeout,
+      timeoutMsg: "Function 'expectAttributeToBe' failed: Timeout while waiting for attribute " + attribute + ". Expected value: " + String(compareValue),
+      interval: 100,
+    });
+
     return expect(String(value)).toEqual(String(compareValue));
   };
 
@@ -59,25 +68,31 @@ export class Assertion {
    */
   async expectAttributeToContain (selector: any, attribute: string, compareValue: any, index = 0, timeout = process.env.QMATE_CUSTOM_TIMEOUT || 30000, loadPropertyTimeout = 10000) {
     let elem: Element;
+    let values;
     let value;
+
+    this._throwAttributeError(attribute, "expectAttributeToContain");
+
     try {
       elem = await ui5.element.getDisplayed(selector, index, timeout);
     } catch (error) {
       throw new Error(`Function 'expectAttributeToContain' failed:${error}`);
     }
 
-    if (loadPropertyTimeout > 0) {
-      await browser.waitUntil(async () => {
-        value = await this._getUI5PropertyForElement(elem, attribute, true);
-        return value.includes(compareValue);
-      }, {
-        timeout: loadPropertyTimeout,
-        timeoutMsg: `Timeout while waiting for attribute '${attribute}'. Actual value doesn't include the expected value: '${String(compareValue)}'.`,
-        interval: 100
-      });
-    } else {
-      value = await this._getUI5PropertyForElement(elem, attribute, true);
-    }
+    await browser.waitUntil(async () => {
+      values = await this._getUI5PropertyForElement(elem, attribute);
+      if (values[0].includes(compareValue)) {
+        value = values[0];
+        return values[0].includes(compareValue);
+      } else if (values[1].includes[compareValue]) {
+        value = values[1];
+        return values[1].includes(compareValue);
+      }
+    }, {
+      timeout: loadPropertyTimeout,
+      timeoutMsg: `Timeout while waiting for attribute '${attribute}'. Actual value doesn't include the expected value: '${String(compareValue)}'.`,
+      interval: 100
+    });
     return expect(value).toContain(compareValue);
   };
 
@@ -383,25 +398,32 @@ export class Assertion {
 
 
   // =================================== HELPER ===================================
-  private async _getUI5PropertyForElement(elem: Element, attribute: string, resetFocus = true) {
-    if (resetFocus) {
-      await util.browser.resetFocus();
-    }
+  private async _getUI5PropertyForElement(elem: Element, attribute: string) {
+    let values = [];
 
     let value = await elem.getUI5Property(attribute);
 
-    if (value === null || value === undefined || value === "") {
-      value = await ui5.element.getInnerAttribute(elem, "data-" + attribute);
-    }
+    //TODO call getInnerAttribute and return an array -> validate then back in function caller 
+    let innerValue: string = await ui5.element.getInnerAttribute(elem, "data-" + attribute);
 
     if (attribute.toLowerCase() === "text") {
       try {
         value = value.trim();
+        innerValue = value.trim()
       } catch (e) {
-        util.console.info("Removing trailing spaces didn't work for 'text' property.");
+        util.console.info("Removing trailing spaces didn 't work for 'text' property.");
       }
     }
-    return value;
+
+    values.push(value, innerValue)
+
+    return values;
+  }
+
+  private _throwAttributeError(attribute: string, functionName: string) {
+    if (!attribute || typeof attribute !== "string") {
+      throw new Error(`Function ${functionName} failed: Please check your attribute argument.`);
+    }
   }
 
 };

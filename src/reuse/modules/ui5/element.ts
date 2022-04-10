@@ -200,7 +200,7 @@ export class ElementModule {
   async getPropertyValue (selector: any, property: string, index = 0, timeout = process.env.QMATE_CUSTOM_TIMEOUT || 30000): Promise<string> {
     let attrValue;
     try {
-      let elem = await this.getDisplayed(selector, index, timeout);
+      const elem = await this.getDisplayed(selector, index, timeout);
       attrValue = await elem.getUI5Property(property);
 
       if (attrValue === null || attrValue === undefined || attrValue === "") {

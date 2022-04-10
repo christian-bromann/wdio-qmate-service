@@ -203,10 +203,10 @@ export class UserInteraction {
     await util.function.retry(async (selector: any, value: string, index: number, timeout: number) => {
       await this.clearAndFill(selector, value, index, timeout);
       if (verify) {
+        let elem = await ui5.element.getDisplayed(selector);
         let elemValue = await ui5.element.getValue(selector, index);
         if (elemValue != value) { // IMPORTANT: keep non-strict comparison for format changes after input (10 -> 10.00)
-          await util.browser.resetFocus();
-          elemValue = await ui5.element.getValue(selector, index);
+          elemValue = await ui5.element.getInnerAttribute(elem, "data-" + "value");
           if (elemValue != value) { // IMPORTANT: keep non-strict comparison for format changes after input (10 -> 10.00)
             throw new Error(`Actual value '${elemValue}' not equal to expected value '${value}'`);
           }
