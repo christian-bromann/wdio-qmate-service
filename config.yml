@@ -1,0 +1,20 @@
+attributes:
+  NoPRJobs: false
+  NoCIJobs: false
+  CI_purge: nopurge
+  UseArtifactory: false
+  cloudshipment: true
+
+defaultTemplate: all
+templates:
+  - Template: all
+    variants:
+      - linuxx86_64
+variants:
+  - Variant: linuxx86_64
+    runtime: linuxx86_64
+branches:
+  - Branch: main
+    type: GITHUB_DEV
+    variants:
+      - linuxx86_64
