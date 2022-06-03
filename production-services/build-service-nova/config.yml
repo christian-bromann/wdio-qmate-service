@@ -1,13 +1,20 @@
 attributes:
-  milestonestaging: true
+  NoPRJobs: false
+  NoCIJobs: false
+  CI_purge: nopurge
+  UseArtifactory: false
+  cloudshipment: true
 
 defaultTemplate: all
 templates:
   - Template: all
     variants:
-      - sonar
       - linuxx86_64
-
 variants:
-- Variant: sonar
-  args: [ '--buildplugin-option', 'options="-Psonar sonar:sonar  -Dsonar.branch=dev  -Dsonar.profile=SAPDefaultProfile_1_4_6"']
+  - Variant: linuxx86_64
+    runtime: linuxx86_64
+branches:
+  - Branch: main
+    type: GITHUB_DEV
+    variants:
+      - linuxx86_64
