@@ -35,7 +35,7 @@ export class UserInteraction {
     try {
       await element.click();
     } catch (error) {
-      const errorMessage = await util.function.mapWdioErrorToQmateErrorMessage(error as Error, "click");
+      const errorMessage = await util.funct.mapWdioErrorToQmateErrorMessage(error as Error, "click");
       throw new Error(errorMessage);
     }
   };
@@ -55,7 +55,7 @@ export class UserInteraction {
     if (!element) {
       throw new Error("Function 'clearAndRetry' failed. Please provide an element as first argument.");
     }
-    return util.function.retry(this.click, [element, timeout], retries, interval, this);
+    return util.funct.retry(this.click, [element, timeout], retries, interval, this);
   };
 
   /**
@@ -83,7 +83,7 @@ export class UserInteraction {
     try {
       await element.doubleClick();
     } catch (error) {
-      const errorMessage = await util.function.mapWdioErrorToQmateErrorMessage(error as Error, "doubleClick");
+      const errorMessage = await util.funct.mapWdioErrorToQmateErrorMessage(error as Error, "doubleClick");
       throw new Error(errorMessage);
     }
   };
@@ -115,7 +115,7 @@ export class UserInteraction {
         button: "right"
       });
     } catch (error) {
-      const errorMessage = await util.function.mapWdioErrorToQmateErrorMessage(error as Error, "rightClick");
+      const errorMessage = await util.funct.mapWdioErrorToQmateErrorMessage(error as Error, "rightClick");
       throw new Error(errorMessage);
     }
   };
@@ -137,7 +137,7 @@ export class UserInteraction {
     } catch (error) {
       // @ts-ignore
       if (error.message && error.message.match(new RegExp(/(invalid element state|element not interactable)/))) {
-        const errorMessage = await util.function.mapWdioErrorToQmateErrorMessage(error as Error, "fill");
+        const errorMessage = await util.funct.mapWdioErrorToQmateErrorMessage(error as Error, "fill");
         throw new Error(errorMessage);
       } else {
         if (!value) {
@@ -164,7 +164,7 @@ export class UserInteraction {
     if (!element || (value === null || value === undefined || value === "")) {
       throw new Error("Function 'fillAndRetry' failed: Please provide an element and value as arguments.");
     } else {
-      return util.function.retry(this.fill, [element, value], retries, interval, this);
+      return util.funct.retry(this.fill, [element, value], retries, interval, this);
     }
   };
 
@@ -199,7 +199,7 @@ export class UserInteraction {
     if (!element) {
       throw new Error("Function 'clearAndRetry' failed: Please provide an element as first argument.");
     }
-    return util.function.retry(this.clear, [element], retries, interval, this);
+    return util.funct.retry(this.clear, [element], retries, interval, this);
   };
 
   /**
@@ -238,7 +238,7 @@ export class UserInteraction {
    * await nonUi5.userInteraction.clearAndFillAndRetry(elem, "Service 01");
    */
   async clearAndFillAndRetry (element: Element, value: string, retries: number = 3, interval: number = 5000, verify: boolean = true) {
-    return util.function.retry(async (elem: Element, value: string) => {
+    return util.funct.retry(async (elem: Element, value: string) => {
       await this.clearAndFill(elem, value);
       if (verify) {
         const elemValue = await elem.getValue();

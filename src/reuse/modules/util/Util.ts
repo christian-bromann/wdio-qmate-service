@@ -3,7 +3,7 @@ import console, {Console} from './console';
 import data, { Data } from './data';
 import file, { File } from './file';
 import formatter, { Formatter } from './formatter';
-import functionModule, { FunctionModule } from './function';
+import funct, { Funct } from './funct';
 import system, {System} from './system';
 
 interface DataHooksExtended extends Data {
@@ -17,7 +17,7 @@ export class Util {
     data: DataHooksExtended = data as DataHooksExtended
     file: File = file
     formatter: Formatter = formatter
-    function: FunctionModule = functionModule
+    funct: Funct = funct
     system: System = system
 }
 

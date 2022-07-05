@@ -41,7 +41,7 @@ export class UserInteraction {
    * @example await common.userInteraction.fillActiveAndRetry("My Value");
    */
   async fillActiveAndRetry (value: string, retries: number = 3, interval: number = 5000) {
-    await util.function.retry(this.fillActive, [value], retries, interval, this);
+    await util.funct.retry(this.fillActive, [value], retries, interval, this);
   };
 
 
@@ -71,7 +71,7 @@ export class UserInteraction {
    * @example await common.userInteraction.clearAndFillActiveAndRetry("My Value");
    */
   async clearAndFillActiveAndRetry (value: string, retries: number = 3, interval: number = 5000) {
-    await util.function.retry(this.clearAndFillActive, [value], retries, interval, this);
+    await util.funct.retry(this.clearAndFillActive, [value], retries, interval, this);
   };
 
 

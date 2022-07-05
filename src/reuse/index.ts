@@ -40,7 +40,7 @@ class ReuseLibrary {
       data: utilQmate.data,
       file: utilQmate.file,
       formatter: utilQmate.formatter,
-      function: utilQmate.function,
+      funct: utilQmate.funct,
       system: utilQmate.system
     };
     global.util = {

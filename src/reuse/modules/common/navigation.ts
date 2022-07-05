@@ -32,7 +32,7 @@ export class Navigation {
    * @example await common.navigation.navigateToUrlAndRetry("www.sap.com");
    */
   async navigateToUrlAndRetry (url: string, retries: number = 3, interval: number = 5000): Promise<void> {
-    await util.function.retry(this.navigateToUrl, [url], retries, interval, this);
+    await util.funct.retry(this.navigateToUrl, [url], retries, interval, this);
   };
 
 };

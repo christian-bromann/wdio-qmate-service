@@ -1,6 +1,6 @@
 exports.handleCookiesConsent = async function handleCookiesConsent() {
   // eslint-disable-next-line no-undef
-  await util.function.executeOptional(async function () {
+  await util.funct.executeOptional(async function () {
     const selector = {
       "elementProperties": {
         "viewName": "sap.ui.documentation.sdk.view.App",

@@ -1,23 +1,23 @@
 "use strict";
 /**
- * @class function
+ * @class funct
  * @memberof util
  */
-export class FunctionModule {
+export class Funct {
   overallRetries: number = 3;
 
   // =================================== MAIN ===================================
   /**
    * @function retry
-   * @memberOf util.function
+   * @memberOf util.funct
    * @description Retries the passed function n times with a specific interval until it executed successfully.
    * @param {Function} fct - The function to retry.
    * @param {Array} args - An array of the arguments passed to the function.
    * @param {Integer} [retries=3] - The number of retries. Can be set in config for all functions under "params" - "stepsRetries".
    * @param {Integer} [interval=5000] - The interval of the retries (ms). Can be set in config for all functions under "params" - "stepRetriesIntervals".
    * @param {Object} [scope=null] - The function scope. Defaults is the global object.
-   * @example await util.function.retry(ui5.userInteraction.fill, [selector, value], 4, 10000);
-   * @example await util.function.retry(async () => {
+   * @example await util.funct.retry(ui5.userInteraction.fill, [selector, value], 4, 10000);
+   * @example await util.funct.retry(async () => {
    *  await ui5.userInteraction.fill(selector, "ABC");
    * }, [], 2, 30000);
    */
@@ -30,12 +30,12 @@ export class FunctionModule {
 
   /**
    * @function executeOptional
-   * @memberOf util.function
+   * @memberOf util.funct
    * @description Executes the given function optionally. If it fails, a promise will be returned anyway.
    * @param {Function} fct - The function to execute.
    * @param {Array} args - An array of the arguments passed to the function.
-   * @example await util.function.executeOptional(ui5.userInteraction.fill, [selector, value]);
-   * @example await util.function.executeOptional(async () => {
+   * @example await util.funct.executeOptional(ui5.userInteraction.fill, [selector, value]);
+   * @example await util.funct.executeOptional(async () => {
    *  await ui5.userInteraction.fill(selector, "ABC");
    * }, []);
    */
@@ -55,12 +55,12 @@ export class FunctionModule {
   // =================================== HELPER ===================================
   /**
    * @function mapWdioErrorToQmateErrorMessage
-   * @memberOf util.function
+   * @memberOf util.funct
    * @private
    * @description Maps Wdio Error to Qmate Error Message
    * @param {Error} wdioError - The wdio error
    * @param {string} action - An action performed upon the element ("click", "fill")
-   * @example await util.function.mapWdioErrorToQmateErrorMessage(error, "click");
+   * @example await util.funct.mapWdioErrorToQmateErrorMessage(error, "click");
    */
   async mapWdioErrorToQmateErrorMessage (wdioError: Error, action: string) {
     const errorMessage = wdioError.message;
@@ -130,4 +130,4 @@ export class FunctionModule {
   }
 };
 
-export default new FunctionModule();
+export default new Funct();

@@ -52,7 +52,7 @@ export class Navigation {
    * @example await ui5.navigation.navigateToApplicationAndRetry("PurchaseOrder-manage");
    */
   async navigateToApplicationAndRetry (intent: string, preventPopups = true, verify = true, retries = 3, interval = 5000) {
-    await util.function.retry(async (intent: string, preventPopups: boolean) => {
+    await util.funct.retry(async (intent: string, preventPopups: boolean) => {
       await this.navigateToApplication(intent, preventPopups, verify);
     }, [intent, preventPopups, verify], retries, interval, this);
   };
@@ -96,7 +96,7 @@ export class Navigation {
    * @example await ui5.navigation.navigateToSystemAndApplicationAndRetry("yourFioriLaunchpad.domain", "PurchaseOrder-manage");
    */
   async navigateToSystemAndApplicationAndRetry (system: string, intent: string, closePopups = true, verify = true, retries = 3, interval = 5000) {
-    await util.function.retry(async (system: string, intent: string, closePopups: boolean) => {
+    await util.funct.retry(async (system: string, intent: string, closePopups: boolean) => {
       await this.navigateToSystemAndApplication(system, intent, closePopups, verify);
     }, [system, intent, closePopups, verify], retries, interval, this);
   };
@@ -147,7 +147,7 @@ export class Navigation {
    * await ui5.navigation.navigateToApplicationWithQueryParamsAndRetry(intent, queryParams);
    */
   async navigateToApplicationWithQueryParamsAndRetry (intent: string, queryParams: string, closePopups = true, verify = true, retries = 3, interval = 5000) {
-    await util.function.retry(async (intent: string, queryParams: string, closePopups: boolean, verify: boolean) => {
+    await util.funct.retry(async (intent: string, queryParams: string, closePopups: boolean, verify: boolean) => {
       await this.navigateToApplicationWithQueryParams(intent, queryParams, closePopups, verify);
     }, [intent, queryParams, closePopups, verify], retries, interval, this);
   };

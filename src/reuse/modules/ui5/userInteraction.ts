@@ -32,7 +32,7 @@ export class UserInteraction {
       // @ts-ignore
       if (error.message && error.message.match(new RegExp(/is not clickable at point/))) {
       // @ts-ignore
-        const errorMessage = await util.function.mapWdioErrorToQmateErrorMessage(error, "click");
+        const errorMessage = await util.funct.mapWdioErrorToQmateErrorMessage(error, "click");
         throw new Error(errorMessage);
       }
     }
@@ -50,7 +50,7 @@ export class UserInteraction {
    * @example await ui5.userInteraction.clickAndRetry(selector);
    */
   async clickAndRetry (selector: any, index = 0, timeout = process.env.QMATE_CUSTOM_TIMEOUT || 30000, retries = 3, interval = 5000) {
-    await util.function.retry(this.click, [selector, index, timeout], retries, interval, this);
+    await util.funct.retry(this.click, [selector, index, timeout], retries, interval, this);
   };
 
   /**
@@ -64,7 +64,7 @@ export class UserInteraction {
    * @example await ui5.userInteraction.clickTab(selector);
    */
   async clickTab (selector: any, index = 0, timeout = process.env.QMATE_CUSTOM_TIMEOUT || 30000) {
-    await util.function.retry(async function (selector: any, index: number, timeout: number) {
+    await util.funct.retry(async function (selector: any, index: number, timeout: number) {
       await ui5.userInteraction.click(selector);
       const tab = await ui5.element.getDisplayed(selector, index, timeout);
       const classList = await tab.getAttribute("class");
@@ -133,7 +133,7 @@ export class UserInteraction {
    * @example await ui5.userInteraction.fillAndRetry(selector, "My Value");
    */
   async fillAndRetry (selector: any, value: string, index = 0, timeout = process.env.QMATE_CUSTOM_TIMEOUT || 30000, retries = 3, interval = 5000) {
-    await util.function.retry(this.fill, [selector, value, index, timeout], retries, interval, this);
+    await util.funct.retry(this.fill, [selector, value, index, timeout], retries, interval, this);
   };
 
   // =================================== CLEAR ===================================
@@ -164,7 +164,7 @@ export class UserInteraction {
    * @example await ui5.userInteraction.clearAndRetry(selector);
    */
   async clearAndRetry (selector: any, index = 0, timeout = process.env.QMATE_CUSTOM_TIMEOUT || 30000, retries = 3, interval = 5000) {
-    await util.function.retry(this.clear, [selector, index, timeout], retries, interval, this);
+    await util.funct.retry(this.clear, [selector, index, timeout], retries, interval, this);
   };
 
   /**
@@ -200,7 +200,7 @@ export class UserInteraction {
    * @example await ui5.userInteraction.clearAndFillAndRetry(selector, "My Value");
    */
   async clearAndFillAndRetry (selector: any, value: string, index = 0, timeout = process.env.QMATE_CUSTOM_TIMEOUT || 30000, retries = 3, interval = 5000, verify = true) {
-    await util.function.retry(async (selector: any, value: string, index: number, timeout: number) => {
+    await util.funct.retry(async (selector: any, value: string, index: number, timeout: number) => {
       await this.clearAndFill(selector, value, index, timeout);
       if (verify) {
         const elem = await ui5.element.getDisplayed(selector)
@@ -259,7 +259,7 @@ export class UserInteraction {
    * @example await ui5.userInteraction.clearAndFillSmartFieldInputAndRetry(selector, "My Value");
    */
   async clearAndFillSmartFieldInputAndRetry (selector: any, value: string, index = 0, timeout = process.env.QMATE_CUSTOM_TIMEOUT || 30000, retries = 3, interval = 5000) {
-    await util.function.retry(this.clearAndFillSmartFieldInput, [selector, value, index, timeout], retries, interval, this);
+    await util.funct.retry(this.clearAndFillSmartFieldInput, [selector, value, index, timeout], retries, interval, this);
   };
 
 
@@ -380,7 +380,7 @@ export class UserInteraction {
    * @example await ui5.userInteraction.clickSelectArrowAndRetry(selector);
    */
   async clickSelectArrowAndRetry (selector: any, index = 0, retries = 3, interval = 5000) {
-    await util.function.retry(this.clickSelectArrow, [selector, index], retries, interval, this);
+    await util.funct.retry(this.clickSelectArrow, [selector, index], retries, interval, this);
   };
 
 
@@ -518,7 +518,7 @@ export class UserInteraction {
       elem = await browser.getActiveElement();
       await elem.click();
       // @ts-ignore
-      id = await util.function.getAttribute(elem, "id");
+      id = await util.funct.getAttribute(elem, "id");
     }
 
     const tokenizers = await browser.execute(function (id: string) {
@@ -570,7 +570,7 @@ export class UserInteraction {
       await elem.doubleClick();
     } catch (error) {
       // @ts-ignore
-      const errorMessage = await util.function.mapWdioErrorToQmateErrorMessage(error, "doubleClick");
+      const errorMessage = await util.funct.mapWdioErrorToQmateErrorMessage(error, "doubleClick");
       throw new Error(errorMessage);
     }
   };
@@ -602,7 +602,7 @@ export class UserInteraction {
       });
     } catch (error) {
       // @ts-ignore
-      const errorMessage = await util.function.mapWdioErrorToQmateErrorMessage(error, "rightClick");
+      const errorMessage = await util.funct.mapWdioErrorToQmateErrorMessage(error, "rightClick");
       throw new Error(errorMessage);
     }
   };
