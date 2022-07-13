@@ -273,7 +273,7 @@ export class Browser {
     }
   }
 
-  async _findAndSwitchWindow(originalHandle: object, windowTitle: string): Promise<boolean> {
+  async _findAndSwitchWindow(originalHandle: object, windowTitle: string | RegExp): Promise<boolean> {
     try {
       const windowHandles = await browser.getWindowHandles();
       for (const windowHandle of windowHandles) {
@@ -282,7 +282,12 @@ export class Browser {
           await browser.executeScript("window.focus();", []);
           if (windowTitle) {
             const title = await browser.getTitle();
-            if (title === windowTitle) {
+            if (windowTitle instanceof RegExp && title) {
+              if (title.match(windowTitle)) {
+                return true;
+              }
+            }
+            else if (title === windowTitle) {
               return true;
             }
           } else {
@@ -301,12 +306,12 @@ export class Browser {
    * @function switchToNewWindow
    * @memberOf util.browser
    * @description Switches the window.
-   * @param {String} windowTitle - window title to be expected
+   * @param {String|RegExp} windowTitle - window title to be expected
    * @param {Number} [retries = 50] - number of retries
    * @param {Number} [waitInterval = 1000] - wait time in milliseconds between retries
    * @example await util.browser.switchToNewWindow("Supplier Invoice");
    */
-  async switchToNewWindow(windowTitle: string, retries: number = 50, waitInterval: number = 1000) {
+  async switchToNewWindow(windowTitle: string | RegExp, retries: number = 50, waitInterval: number = 1000) {
     const originalHandle = await this.getCurrentWindow();
     for (let i = 0; i < retries; i++) {
       try {
