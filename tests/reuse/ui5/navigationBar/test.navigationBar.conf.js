@@ -1,6 +1,6 @@
 const path = require("path");
 const qmateProfiles = require("qmate-profiles");
-const profile = qmateProfiles.chromeHeadless;
+const profile = qmateProfiles.reportHeadless;
 
 exports.config = qmateProfiles.merge(profile, {
   maxInstances: 4,
