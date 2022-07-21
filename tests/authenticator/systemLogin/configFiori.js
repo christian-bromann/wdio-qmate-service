@@ -1,6 +1,6 @@
 const path = require("path");
 const qmateProfiles = require("qmate-profiles");
-const profile = qmateProfiles.sauceTunnel;
+const profile = qmateProfiles.chromeHeadless;
 
 exports.config = qmateProfiles.merge(profile, {
   maxInstances: 1,
