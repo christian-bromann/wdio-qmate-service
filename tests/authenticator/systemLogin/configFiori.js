@@ -1,7 +1,8 @@
 const path = require("path");
-const merge = require("deepmerge");
-const fioriConfig = require("../../helper/configurations/chrome.headless.conf.js");
-exports.config = merge(fioriConfig.config, {
+const qmateProfiles = require("qmate-profiles");
+const profile = qmateProfiles.sauceTunnel;
+
+exports.config = qmateProfiles.merge(profile, {
   maxInstances: 1,
   bail: 1,
 

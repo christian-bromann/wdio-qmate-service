@@ -1,8 +1,9 @@
-var merge = require("deepmerge");
-var path = require("path");
-var qmateConf = require("../../helper/configurations/chrome.headless.conf");
-// have main config file as default but overwrite environment specific information
-exports.config = merge(qmateConf.config, {
+
+const path = require("path");
+const qmateProfiles = require("qmate-profiles");
+const profile = qmateProfiles.chromeHeadless;
+
+exports.config = qmateProfiles.merge(profile, {
   baseUrl: "https://sapui5.hana.ondemand.com/1.99.0/test-resources/sap/m/demokit/cart/webapp/index.html",
 
   suites: {

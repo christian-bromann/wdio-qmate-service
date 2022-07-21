@@ -1,12 +1,14 @@
-const merge = require("deepmerge");
-const baseConfig = require("./base.conf.js");
+const qmateProfiles = require("qmate-profiles");
+const profile = qmateProfiles.base;
+
 const defaultBrowserSauceOptions = {
   build: `SauceLab test. Build-${new Date().getTime()}`,
   screenResolution: "1600x1200",
   tunnelIdentifier: "sap-intranet", // Note: name, not an ID
   parentTunnel: "S-A-P"
 };
-exports.config = merge(baseConfig.config, {
+
+exports.config = qmateProfiles.merge(profile, {
   services: ["sauce", "shared-store"],
   capabilities: [
     {

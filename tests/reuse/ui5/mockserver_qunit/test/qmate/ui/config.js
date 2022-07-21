@@ -1,7 +1,8 @@
 const path = require("path");
-const merge = require("deepmerge");
-const plainConfig = require("../../../../../../helper/configurations/base.conf.js");
-exports.config = merge(plainConfig.config, {
+const qmateProfiles = require("qmate-profiles");
+const profile = qmateProfiles.base;
+
+exports.config = qmateProfiles.merge(profile, {
   capabilities: [{
 
     // maxInstances can get overwritten per capability. So if you have an in-house Selenium

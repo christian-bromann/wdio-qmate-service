@@ -1,11 +1,12 @@
-// WDIO + SauceLabs examples => https://github.com/saucelabs-training/demo-js/tree/main/webdriverio/webdriver
-const merge = require("deepmerge");
-const baseConfig = require("./base.conf.js");
+const qmateProfiles = require("qmate-profiles");
+const profile = qmateProfiles.base;
+
 const defaultBrowserSauceOptions = {
   build: `SauceLab test. Build-${new Date().getTime()}`,
   screenResolution: "1600x1200"
 };
-exports.config = merge(baseConfig.config, {
+
+exports.config = qmateProfiles.merge(profile, {
   // Note: provide browsers in your config (with tunnel, if required)
   services: ["sauce", "shared-store"],
   capabilities: [

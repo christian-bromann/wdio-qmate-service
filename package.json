@@ -144,6 +144,7 @@
     "jsdoc-to-markdown": "^7.1.1",
     "json-server": "^0.17.0",
     "npx": "^3.0.0",
+    "qmate-profiles": "^1.2.6",
     "rimraf": "^3.0.2",
     "typescript": "^4.6.3",
     "wdio-chromedriver-service": "^7.3.2"

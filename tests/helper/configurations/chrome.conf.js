@@ -1,6 +1,7 @@
-const merge = require("deepmerge");
-const baseConfig = require("./base.conf.js");
-exports.config = merge(baseConfig.config, {
+const qmateProfiles = require("qmate-profiles");
+const profile = qmateProfiles.base;
+
+exports.config = qmateProfiles.merge(profile, {
 
   //
   // Override default path ('/wd/hub') for chromedriver service.

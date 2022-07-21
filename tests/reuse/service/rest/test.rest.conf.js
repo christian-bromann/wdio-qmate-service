@@ -1,7 +1,8 @@
 const path = require("path");
-const merge = require("deepmerge");
-const qmateConfiguration = require("../../../helper/configurations/chrome.headless.conf");
-exports.config = merge(qmateConfiguration.config, {
+const qmateProfiles = require("qmate-profiles");
+const profile = qmateProfiles.reportHeadless;
+
+exports.config = qmateProfiles.merge(profile, {
   bail: 1,
   baseUrl: "http://localhost:3000",
   
