@@ -1,6 +1,6 @@
 "use strict";
 
-const legacyMapper = require("./helper/legacySupport/legacyMapper.js");
+const qmateMigrator = require("qmate-migrator");
 
 // modules
 import utilQmate from './modules/util/Util'
@@ -103,7 +103,7 @@ class ReuseLibrary {
       ...global.service
     };
 
-    legacyMapper();
+    qmateMigrator.mapVyperNamespaces();
   };
 };
 
